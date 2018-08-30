@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1097348190401",
+    "firebase_url": "https://myevents-unir.firebaseio.com",
+    "project_id": "myevents-unir",
+    "storage_bucket": "myevents-unir.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097348190401:android:62dcf5b9d2b35639",
+        "android_client_info": {
+          "package_name": "myevents.almansa.unir.es.myevents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1097348190401-bsio0t0vcth5ok1olqe9b3bc084l8sfr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "myevents.almansa.unir.es.myevents",
+            "certificate_hash": "17c08e618ce9b3b9456c4901551f265a8798a6ec"
+          }
+        },
+        {
+          "client_id": "1097348190401-3j9f44td26tb6blhgeos7d5jfrgg4rt8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzCQ9EbqIL_NNmvCnl_sC5iuMaHVee0CA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1097348190401-3j9f44td26tb6blhgeos7d5jfrgg4rt8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
