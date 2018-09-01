@@ -1,16 +1,14 @@
 package myevents.almansa.unir.es.myevents.model
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import com.google.firebase.firestore.FirebaseFirestore
 import myevents.almansa.unir.es.myevents.R
 
-class EventsRecyclerViewAdapter(private val eventList: MutableList<Event>,
-                                private val context: Context,
-                                private val db: FirebaseFirestore)
+class EventsRecyclerViewAdapter(private val eventList: MutableList<Event>)
+
     : RecyclerView.Adapter<EventsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -24,7 +22,9 @@ class EventsRecyclerViewAdapter(private val eventList: MutableList<Event>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent!!.context).inflate(R.layout.event_item_view, parent, false)
 
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {

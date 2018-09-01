@@ -4,9 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
-import android.util.Patterns
 import android.widget.Button
-import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
@@ -38,7 +36,7 @@ class LoginView : AppCompatActivity() {
 
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this, OnCompleteListener { task ->
             if (task.isSuccessful) {
-                startActivity(Intent(this, MyEventsView:: class.java))
+                startActivity(Intent(this, MyEventsViewImpl:: class.java))
                 toast("successful login")
             } else {
                 toast("incorrect login")
