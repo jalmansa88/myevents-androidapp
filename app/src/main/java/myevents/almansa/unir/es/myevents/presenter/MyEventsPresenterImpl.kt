@@ -3,6 +3,7 @@ package myevents.almansa.unir.es.myevents.presenter
 import android.text.TextUtils
 import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import myevents.almansa.unir.es.myevents.model.Event
 import myevents.almansa.unir.es.myevents.model.MyEventsModel
@@ -20,18 +21,29 @@ class MyEventsPresenterImpl(var model: MyEventsModel) : MyEventsPresenter {
 
     override fun loadEvents() {
 
+        view?.showLoading()
+
         model.loadEvents()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe ({ event ->
-
-                view?.updateRecyclerView(event)
-                view?.showSuccess("Perfect")
-            },
-            { e ->
-                view?.showError(e.message!!)
-            }
-        )
+                .subscribeBy(
+                    onNext = {
+                        view?.updateRecyclerView(it)
+                    },
+                    onComplete = {
+                        view?.showContent()
+                    },
+                    onError = {
+                        view?.showError()
+                    }
+                )
+//                .subscribe({ event ->
+//
+//                    view?.updateRecyclerView(event)
+//                },
+//                {
+//                    view?.showError()
+//                })
     }
 
     override fun destroy() {
