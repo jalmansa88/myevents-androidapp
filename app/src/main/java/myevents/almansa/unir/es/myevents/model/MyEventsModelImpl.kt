@@ -1,12 +1,13 @@
 package myevents.almansa.unir.es.myevents.model
 
-import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import io.reactivex.Emitter
 import io.reactivex.Observable
 import myevents.almansa.unir.es.myevents.utils.Constants
-import org.jetbrains.anko.doAsyncResult
-import java.util.concurrent.Future
+import org.jetbrains.anko.custom.async
+import org.jetbrains.anko.doAsync
+import java.util.concurrent.atomic.AtomicInteger
 
 class MyEventsModelImpl : MyEventsModel {
 
@@ -45,6 +46,7 @@ class MyEventsModelImpl : MyEventsModel {
                         userEventAttendeeList.add(attendee)
                     }
 
+                    var counter = AtomicInteger(0)
                     for (attendee in userEventAttendeeList) {
 
                         val eventsQuery = eventsRef.document(attendee.event_uid)
@@ -52,7 +54,14 @@ class MyEventsModelImpl : MyEventsModel {
                         eventsQuery.get()
                                 .addOnCompleteListener { task ->
                                     if (task.isComplete) {
-                                        emitter.onNext(task.result.toObject(Event::class.java))
+                                        counter.incrementAndGet()
+                                        val event = task.result.toObject(Event::class.java)
+                                        event.role = attendee.role
+                                        emitter.onNext(event)
+
+                                        if (counter.get() == userEventAttendeeList.size) {
+                                            emitter.onComplete()
+                                        }
                                     }
                                 }
                     }
