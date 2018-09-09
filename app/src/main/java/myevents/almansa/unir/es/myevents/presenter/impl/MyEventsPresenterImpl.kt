@@ -1,14 +1,11 @@
-package myevents.almansa.unir.es.myevents.presenter
+package myevents.almansa.unir.es.myevents.presenter.impl
 
-import android.text.TextUtils
-import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import myevents.almansa.unir.es.myevents.model.Event
-import myevents.almansa.unir.es.myevents.model.MyEventsModel
-import myevents.almansa.unir.es.myevents.model.MyEventsModelImpl
-import myevents.almansa.unir.es.myevents.view.MyEventsView
+import myevents.almansa.unir.es.myevents.model.interfaces.MyEventsModel
+import myevents.almansa.unir.es.myevents.presenter.interfaces.MyEventsPresenter
+import myevents.almansa.unir.es.myevents.view.interfaces.MyEventsView
 
 class MyEventsPresenterImpl(var model: MyEventsModel) : MyEventsPresenter {
 
@@ -37,13 +34,6 @@ class MyEventsPresenterImpl(var model: MyEventsModel) : MyEventsPresenter {
                         view?.showError()
                     }
                 )
-//                .subscribe({ event ->
-//
-//                    view?.updateRecyclerView(event)
-//                },
-//                {
-//                    view?.showError()
-//                })
     }
 
     override fun destroy() {

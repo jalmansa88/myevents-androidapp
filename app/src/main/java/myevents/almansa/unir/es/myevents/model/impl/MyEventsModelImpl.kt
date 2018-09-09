@@ -1,18 +1,16 @@
-package myevents.almansa.unir.es.myevents.model
+package myevents.almansa.unir.es.myevents.model.impl
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import io.reactivex.Emitter
 import io.reactivex.Observable
+import myevents.almansa.unir.es.myevents.model.Attendee
+import myevents.almansa.unir.es.myevents.model.Event
+import myevents.almansa.unir.es.myevents.model.interfaces.MyEventsModel
+import myevents.almansa.unir.es.myevents.model.User
 import myevents.almansa.unir.es.myevents.utils.Constants
-import org.jetbrains.anko.custom.async
-import org.jetbrains.anko.doAsync
 import java.util.concurrent.atomic.AtomicInteger
 
 class MyEventsModelImpl : MyEventsModel {
-
-//    @Inject
-//    lateinit var myEventsPresenter: MyEventsPresenter
 
     private val db = FirebaseFirestore.getInstance()
     private val mAuth = FirebaseAuth.getInstance()
@@ -55,7 +53,10 @@ class MyEventsModelImpl : MyEventsModel {
                                 .addOnCompleteListener { task ->
                                     if (task.isComplete) {
                                         counter.incrementAndGet()
-                                        val event = task.result.toObject(Event::class.java)
+
+                                        val doc = task.result
+                                        val event = doc.toObject(Event::class.java)
+                                        event.uid = doc.id
                                         event.role = attendee.role
                                         emitter.onNext(event)
 

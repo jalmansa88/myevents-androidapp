@@ -1,18 +1,18 @@
-package myevents.almansa.unir.es.myevents.model
+package myevents.almansa.unir.es.myevents.model.adapters
 
 import android.content.Context
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import kotlinx.android.synthetic.main.myevents_view.view.*
 import myevents.almansa.unir.es.myevents.R
+import myevents.almansa.unir.es.myevents.model.Event
+import myevents.almansa.unir.es.myevents.utils.Constants
 import myevents.almansa.unir.es.myevents.utils.getRolName
+import myevents.almansa.unir.es.myevents.view.impl.EventImagesViewImpl
 
 class EventsRecyclerViewAdapter(private val eventList: MutableList<Event>)
 
@@ -37,10 +37,15 @@ class EventsRecyclerViewAdapter(private val eventList: MutableList<Event>)
 
     private fun onClickOpenEventDetail(event: Event, context: Context) {
         Toast.makeText(context, "Opened event" + event.name, Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(context, EventImagesViewImpl::class.java)
+        intent.putExtra(Constants.EVENT_UID, event.uid)
+
+        context.startActivity(intent)
     }
 
 
-    inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder internal constructor(val view: View) : RecyclerView.ViewHolder(view) {
         internal var name: TextView = view.findViewById(R.id.tvEventName)
         internal var description: TextView = view.findViewById(R.id.tvEventDescription)
         internal var role: TextView = view.findViewById(R.id.tvEventRole)
@@ -51,9 +56,7 @@ class EventsRecyclerViewAdapter(private val eventList: MutableList<Event>)
             description.text = event.description
             role.text = event.getRolName()
 
-            this.itemView.setOnClickListener{ onClickOpenEventDetail(event, this.itemView.context) }
-
-
+            this.view.setOnClickListener{ onClickOpenEventDetail(event, this.itemView.context) }
         }
     }
 

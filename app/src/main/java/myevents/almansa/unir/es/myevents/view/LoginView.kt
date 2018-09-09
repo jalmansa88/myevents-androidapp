@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import myevents.almansa.unir.es.myevents.R
 import myevents.almansa.unir.es.myevents.utils.toast
+import myevents.almansa.unir.es.myevents.view.impl.MyEventsViewImpl
 
 class LoginView : AppCompatActivity() {
 

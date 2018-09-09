@@ -21,7 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.MyEventsViewImpl"></activity>
+        <activity android:name=".view.impl.MyEventsViewImpl" />
+        <activity
+            android:name=".view.MainActivity"
+            android:label="@string/title_activity_main" />
+        <activity
+            android:name=".view.Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.impl.EventImagesViewImpl"></activity>
     </application>
 
 </manifest>

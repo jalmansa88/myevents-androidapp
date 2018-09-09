@@ -1,20 +1,20 @@
-package myevents.almansa.unir.es.myevents.view
+package myevents.almansa.unir.es.myevents.view.impl
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import kotlinx.android.synthetic.main.myevents_view.*
 import myevents.almansa.unir.es.myevents.R
 import myevents.almansa.unir.es.myevents.di.Components.DaggerMyEventsComponent
 import myevents.almansa.unir.es.myevents.di.Modules.MyEventsModule
 import myevents.almansa.unir.es.myevents.model.Event
-import myevents.almansa.unir.es.myevents.model.EventsRecyclerViewAdapter
-import myevents.almansa.unir.es.myevents.presenter.MyEventsPresenter
+import myevents.almansa.unir.es.myevents.model.adapters.EventsRecyclerViewAdapter
+import myevents.almansa.unir.es.myevents.presenter.interfaces.MyEventsPresenter
 import myevents.almansa.unir.es.myevents.utils.toast
+import myevents.almansa.unir.es.myevents.view.interfaces.MyEventsView
 import javax.inject.Inject
 
 class MyEventsViewImpl : AppCompatActivity(), MyEventsView {

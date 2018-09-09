@@ -35,6 +35,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation group: 'org.jetbrains.anko', name: 'anko-common', version: '0.10.5'
+    implementation group: 'com.squareup.picasso', name: 'picasso', version: '2.5.2'
 
     // Firebase
     implementation 'com.google.firebase:firebase-auth:11.8.0'
@@ -46,11 +47,9 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:2.17"
     kapt 'com.google.dagger:dagger-compiler:2.17'
     kapt "com.google.dagger:dagger-android-processor:2.17"
-//    annotationProcessor 'com.google.dagger:dagger-compiler:2.17'
 
     // RxKotlin
     implementation group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: '2.3.0'
-//    compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.1'
     compile group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.0'
 
 }
