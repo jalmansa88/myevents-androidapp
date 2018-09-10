@@ -5,4 +5,5 @@ interface LoadingContentView {
     fun showContent()
     fun showError()
     fun showLoading()
+    fun showEmpty()
 }

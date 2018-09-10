@@ -33,9 +33,7 @@ class EventImagesRecyclerViewAdapter(private val images: List<Img>): RecyclerVie
 
         fun bind(img: Img) {
             ImageLoader.load(this.itemView.context, img.url, pic)
-
-            title.text = String.format(R.string.event_images.toString(), img.nombre)
-//                    "${img.nombre} Images"
+            title.text = img.nombre
         }
     }
 }

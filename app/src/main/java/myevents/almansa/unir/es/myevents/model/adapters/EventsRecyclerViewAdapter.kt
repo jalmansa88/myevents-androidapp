@@ -39,7 +39,7 @@ class EventsRecyclerViewAdapter(private val eventList: MutableList<Event>)
         Toast.makeText(context, "Opened event" + event.name, Toast.LENGTH_SHORT).show()
 
         val intent = Intent(context, EventImagesViewImpl::class.java)
-        intent.putExtra(Constants.EVENT_UID, event.uid)
+        intent.putExtra(Constants.EVENT, event)
 
         context.startActivity(intent)
     }

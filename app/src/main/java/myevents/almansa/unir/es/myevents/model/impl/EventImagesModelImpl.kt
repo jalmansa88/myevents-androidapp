@@ -12,9 +12,11 @@ class EventImagesModelImpl: EventImagesModel {
 
     private val imgRef = db.collection(Constants.IMAGES_TABLE_NAME)
 
-    override fun loadImages(eventUid: String): Observable<List<Img>> {
+    override fun loadImages(eventUid: String, role: Int): Observable<List<Img>> {
 
-        val imgQuery = imgRef.whereEqualTo(Constants.EVENT_UID, eventUid)
+        val imgQuery = imgRef
+                .whereEqualTo(Constants.EVENT_UID, eventUid)
+                .whereEqualTo("isVip", role > 1)
 
         return Observable.create { emitter ->
 

@@ -13,5 +13,6 @@ class Constants {
 
         const val ROLE = "role"
         const val EMAIL = "email"
+        const val EVENT = "event"
     }
 }

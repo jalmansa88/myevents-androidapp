@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.myevents_view.*
 import myevents.almansa.unir.es.myevents.R
 import myevents.almansa.unir.es.myevents.di.Components.DaggerEventImagesComponent
 import myevents.almansa.unir.es.myevents.di.Modules.EventImagesModule
+import myevents.almansa.unir.es.myevents.model.Event
 import myevents.almansa.unir.es.myevents.model.Img
 import myevents.almansa.unir.es.myevents.model.adapters.EventImagesRecyclerViewAdapter
 import myevents.almansa.unir.es.myevents.model.adapters.EventsRecyclerViewAdapter
@@ -32,9 +33,11 @@ class EventImagesViewImpl : AppCompatActivity(), EventImagesView {
         setContentView(R.layout.event_images_view)
         injectDependency()
 
-        val eventUid = intent.extras.get(Constants.EVENT_UID) as String
+        val event = intent.extras.get(Constants.EVENT) as Event
 
-        eventImagesPresenter.setView(this, eventUid)
+        eventImagesPresenter.setView(this, event.uid, event.role)
+
+        tvEventEventname.text = event.name
 
         val mLayoutManager = LinearLayoutManager(applicationContext)
         rvEventImages.layoutManager = mLayoutManager
@@ -48,7 +51,6 @@ class EventImagesViewImpl : AppCompatActivity(), EventImagesView {
     override fun updateRecyclerView(images: List<Img>) {
         eventImagesAdapter = EventImagesRecyclerViewAdapter(images)
         rvEventImages.adapter = eventImagesAdapter
-//        rvEventImages.adapter.notifyDataSetChanged()
     }
 
 
@@ -59,18 +61,28 @@ class EventImagesViewImpl : AppCompatActivity(), EventImagesView {
         eventImages_content.visibility = View.INVISIBLE
         eventImages_loading.visibility = View.INVISIBLE
         eventImages_error.visibility = View.VISIBLE
+        eventImages_empty.visibility = View.GONE
     }
 
     override fun showLoading() {
         eventImages_content.visibility = View.INVISIBLE
         eventImages_loading.visibility = View.VISIBLE
         eventImages_error.visibility = View.GONE
+        eventImages_empty.visibility = View.GONE
     }
 
     override fun showContent() {
         eventImages_content.visibility = View.VISIBLE
         eventImages_loading.visibility = View.INVISIBLE
         eventImages_error.visibility = View.GONE
+        eventImages_empty.visibility = View.GONE
+    }
+
+    override fun showEmpty() {
+        eventImages_content.visibility = View.GONE
+        eventImages_loading.visibility = View.GONE
+        eventImages_error.visibility = View.GONE
+        eventImages_empty.visibility = View.VISIBLE
     }
 
     private fun injectDependency() {

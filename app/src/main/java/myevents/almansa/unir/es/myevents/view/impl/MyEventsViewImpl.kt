@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import kotlinx.android.synthetic.main.event_images_view.*
 import kotlinx.android.synthetic.main.myevents_view.*
 import myevents.almansa.unir.es.myevents.R
 import myevents.almansa.unir.es.myevents.di.Components.DaggerMyEventsComponent
@@ -23,7 +24,7 @@ class MyEventsViewImpl : AppCompatActivity(), MyEventsView {
 
     private lateinit var eventAdapter: EventsRecyclerViewAdapter
 
-    private val events: MutableList<Event> = mutableListOf()
+    val events: MutableList<Event> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -65,18 +66,28 @@ class MyEventsViewImpl : AppCompatActivity(), MyEventsView {
         rvEvents.visibility = View.INVISIBLE
         loading_layout.visibility = View.INVISIBLE
         error_layout.visibility = View.VISIBLE
+        noevents_layout.visibility = View.VISIBLE
     }
 
     override fun showLoading() {
         rvEvents.visibility = View.INVISIBLE
         loading_layout.visibility = View.VISIBLE
         error_layout.visibility = View.GONE
+        noevents_layout.visibility = View.GONE
     }
 
     override fun showContent() {
         rvEvents.visibility = View.VISIBLE
         loading_layout.visibility = View.INVISIBLE
         error_layout.visibility = View.GONE
+        noevents_layout.visibility = View.GONE
+    }
+
+    override fun showEmpty() {
+        rvEvents.visibility = View.GONE
+        loading_layout.visibility = View.GONE
+        error_layout.visibility = View.GONE
+        noevents_layout.visibility = View.VISIBLE
     }
 
     override fun showToast(msg: String) {
