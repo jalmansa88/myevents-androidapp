@@ -7,4 +7,6 @@ interface MyEventsPresenter {
     fun setView(view: MyEventsView)
     fun destroy()
     fun loadEvents()
+    fun onClickLogout()
+
 }

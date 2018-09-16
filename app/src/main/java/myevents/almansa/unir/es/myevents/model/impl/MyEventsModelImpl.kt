@@ -19,13 +19,13 @@ class MyEventsModelImpl : MyEventsModel {
     private val attendeeRef = db.collection(Constants.ATTENDEES_TABLE_NAME)
     private val eventsRef = db.collection(Constants.EVENTS_TABLE_NAME)
 
-    private var currentUser = mAuth.currentUser?.email
+    private var currentUserEmail = mAuth.currentUser?.email
 
     override fun loadEvents(): Observable<Event> {
 
         return Observable.create { emitter ->
 
-            val userQuery = userRef.whereEqualTo(Constants.EMAIL, currentUser)
+            val userQuery = userRef.whereEqualTo(Constants.EMAIL, currentUserEmail)
 
             userQuery.get().addOnCompleteListener { task ->
                 val doc = task.result.documents[0]
@@ -42,6 +42,10 @@ class MyEventsModelImpl : MyEventsModel {
                         val attendee = doc.toObject<Attendee>(Attendee::class.java)
                         attendee.uid = doc.id
                         userEventAttendeeList.add(attendee)
+                    }
+
+                    if (userEventAttendeeList.size == 0){
+                        emitter.onComplete()
                     }
 
                     var counter = AtomicInteger(0)

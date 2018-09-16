@@ -6,22 +6,18 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvEventEventname"
+        android:id="@+id/tvImagesEventname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:fontFamily="sans-serif-condensed"
         android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@android:color/background_dark"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/colorPrimaryDark"
-        tools:text="EVENT NAME"
-        tools:textColor="@android:color/background_dark"
-        tools:textSize="24sp" />
+        tools:text="Event Name" />
 
     <LinearLayout
         android:id="@+id/eventImages_empty"

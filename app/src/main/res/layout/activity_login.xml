@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,9 +10,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".view.LoginView">
+    tools:context=".view.impl.LoginViewImpl">
 
     <!-- Login progress -->
+
     <ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
@@ -23,7 +25,7 @@
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -57,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
                     android:imeActionId="6"
-                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeActionLabel="@string/action_sign_in"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
@@ -68,13 +70,49 @@
 
             <Button
                 android:id="@+id/btnLogin"
-                style="?android:textAppearanceSmall"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:backgroundTint="@android:color/holo_red_light"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/facebook_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="or"
+            android:textColor="@android:color/background_dark"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/btFbLogin"
+            android:layout_width="334dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="16dp"
+            android:text="Button"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+    </android.support.constraint.ConstraintLayout>
+
 </LinearLayout>

@@ -40,6 +40,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation group: 'org.jetbrains.anko', name: 'anko-common', version: '0.10.5'
     implementation group: 'com.squareup.picasso', name: 'picasso', version: '2.5.2'
+    implementation group: 'com.facebook.android', name: 'facebook-android-sdk', version: '4.8.2'
 
     // Firebase
     implementation 'com.google.firebase:firebase-auth:11.8.0'

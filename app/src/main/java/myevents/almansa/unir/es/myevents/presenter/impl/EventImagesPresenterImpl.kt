@@ -3,6 +3,7 @@ package myevents.almansa.unir.es.myevents.presenter.impl
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import myevents.almansa.unir.es.myevents.model.Event
 import myevents.almansa.unir.es.myevents.model.Img
 import myevents.almansa.unir.es.myevents.model.interfaces.EventImagesModel
 import myevents.almansa.unir.es.myevents.presenter.interfaces.EventImagesPresenter
@@ -15,9 +16,9 @@ class EventImagesPresenterImpl(var model: EventImagesModel): EventImagesPresente
 
     private lateinit var images: List<Img>
 
-    override fun setView(view: EventImagesView, eventUid: String, role: Int) {
+    override fun setView(view: EventImagesView, event: Event) {
         this.view = view
-        loadImages(eventUid, role)
+        loadImages(event.uid, event.role)
     }
 
     override fun destroy() {

@@ -12,7 +12,7 @@ class ImageLoader {
             Picasso
                     .with(context)
                     .load(url)
-                    .placeholder(R.drawable.ic_menu_gallery)
+                    .placeholder(R.drawable.ic_loading)
                     .error(R.drawable.ic_broken_image)
                     .into(iv)
         }

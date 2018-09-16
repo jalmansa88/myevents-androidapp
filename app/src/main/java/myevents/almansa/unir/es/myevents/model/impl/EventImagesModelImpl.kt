@@ -1,5 +1,6 @@
 package myevents.almansa.unir.es.myevents.model.impl
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import io.reactivex.Observable
 import myevents.almansa.unir.es.myevents.model.Img
@@ -14,9 +15,10 @@ class EventImagesModelImpl: EventImagesModel {
 
     override fun loadImages(eventUid: String, role: Int): Observable<List<Img>> {
 
-        val imgQuery = imgRef
+        var imgQuery = imgRef
                 .whereEqualTo(Constants.EVENT_UID, eventUid)
-                .whereEqualTo("isVip", role > 1)
+
+        if (role < 2) imgQuery = imgQuery.whereEqualTo("isVip", false)
 
         return Observable.create { emitter ->
 

@@ -1,12 +1,14 @@
 package myevents.almansa.unir.es.myevents.view.impl
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import kotlinx.android.synthetic.main.event_images_view.*
 import kotlinx.android.synthetic.main.myevents_view.*
 import myevents.almansa.unir.es.myevents.R
 import myevents.almansa.unir.es.myevents.di.Components.DaggerMyEventsComponent
@@ -92,6 +94,21 @@ class MyEventsViewImpl : AppCompatActivity(), MyEventsView {
 
     override fun showToast(msg: String) {
         toast(msg)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        myEventsPresenter.onClickLogout()
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun navigateToLoginView() {
+        startActivity(Intent(this, LoginViewImpl::class.java))
     }
 
 }

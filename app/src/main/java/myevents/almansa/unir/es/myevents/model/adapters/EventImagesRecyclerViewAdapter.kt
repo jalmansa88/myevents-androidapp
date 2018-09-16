@@ -10,11 +10,11 @@ import myevents.almansa.unir.es.myevents.R
 import myevents.almansa.unir.es.myevents.model.Img
 import myevents.almansa.unir.es.myevents.utils.ImageLoader
 
-class EventImagesRecyclerViewAdapter(private val images: List<Img>): RecyclerView.Adapter<EventImagesRecyclerViewAdapter.ViewHolder>() {
+class EventImagesRecyclerViewAdapter(private val images: List<Img>, private val isUserVip: Boolean): RecyclerView.Adapter<EventImagesRecyclerViewAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val img: Img = images[position]
 
-        holder.bind(img)
+        holder.bind(img, isUserVip)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,10 +30,12 @@ class EventImagesRecyclerViewAdapter(private val images: List<Img>): RecyclerVie
     inner class ViewHolder internal constructor(view: View): RecyclerView.ViewHolder(view) {
         internal var pic: ImageView = view.findViewById(R.id.ivImageItem)
         internal var title: TextView = view.findViewById(R.id.tvImageItemTitle)
+        internal var lock: ImageView = view.findViewById(R.id.ivImagesLock)
 
-        fun bind(img: Img) {
+        fun bind(img: Img, isUserVip: Boolean) {
             ImageLoader.load(this.itemView.context, img.url, pic)
             title.text = img.nombre
+            if (isUserVip && img.isVip) lock.visibility = View.VISIBLE
         }
     }
 }

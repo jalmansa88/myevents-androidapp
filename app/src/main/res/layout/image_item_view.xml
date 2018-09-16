@@ -35,4 +35,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Image Title" />
+
+    <ImageView
+        android:id="@+id/ivImagesLock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:tint="@android:color/holo_orange_light"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivImageItem"
+        app:layout_constraintTop_toTopOf="@+id/ivImageItem"
+        app:srcCompat="@drawable/ic_lock_black_24dp" />
 </android.support.constraint.ConstraintLayout>

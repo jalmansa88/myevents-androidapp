@@ -5,4 +5,5 @@ import myevents.almansa.unir.es.myevents.model.Event
 
 interface MyEventsView: LoadingContentView {
     fun updateRecyclerView(event: Event)
+    fun navigateToLoginView()
 }

@@ -27,29 +27,30 @@ class EventImagesViewImpl : AppCompatActivity(), EventImagesView {
     lateinit var eventImagesPresenter: EventImagesPresenter
 
     private lateinit var eventImagesAdapter: EventImagesRecyclerViewAdapter
+    private lateinit var event: Event
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.event_images_view)
         injectDependency()
 
-        val event = intent.extras.get(Constants.EVENT) as Event
+        event = intent.extras.get(Constants.EVENT) as Event
 
-        eventImagesPresenter.setView(this, event.uid, event.role)
+        eventImagesPresenter.setView(this, event)
 
-        tvEventEventname.text = event.name
+        tvImagesEventname.text = event.name
 
         val mLayoutManager = LinearLayoutManager(applicationContext)
         rvEventImages.layoutManager = mLayoutManager
         rvEventImages.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         rvEventImages.itemAnimator = DefaultItemAnimator()
 
-        eventImagesAdapter = EventImagesRecyclerViewAdapter(mutableListOf())
+        eventImagesAdapter = EventImagesRecyclerViewAdapter(mutableListOf(), event.role > 1)
         rvEventImages.adapter = eventImagesAdapter
     }
 
     override fun updateRecyclerView(images: List<Img>) {
-        eventImagesAdapter = EventImagesRecyclerViewAdapter(images)
+        eventImagesAdapter = EventImagesRecyclerViewAdapter(images, event.role > 1)
         rvEventImages.adapter = eventImagesAdapter
     }
 

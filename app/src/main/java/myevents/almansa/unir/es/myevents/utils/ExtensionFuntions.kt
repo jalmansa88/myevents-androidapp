@@ -2,7 +2,10 @@ package myevents.almansa.unir.es.myevents.utils
 
 import android.app.Activity
 import android.widget.Toast
+import com.facebook.CallbackManager
+import com.facebook.login.widget.LoginButton
 import myevents.almansa.unir.es.myevents.model.Event
+import myevents.almansa.unir.es.myevents.utils.functional_clases.F_FacebookCallback
 
 fun Activity.toast(msg: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, msg, duration).show()
@@ -28,4 +31,13 @@ fun Event.getRolName(): String {
         return "Unkown"
         //TODO: Throw exception
     }
+}
+
+fun LoginButton.registerCallback(
+        manager: CallbackManager,
+        func: F_FacebookCallback.() -> Unit) {
+
+        val result = F_FacebookCallback()
+        result.func()
+        registerCallback(manager, result)
 }
