@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.text.method.TextKeyListener
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,8 +15,10 @@ import myevents.almansa.unir.es.myevents.R
 import myevents.almansa.unir.es.myevents.di.Components.DaggerMyEventsComponent
 import myevents.almansa.unir.es.myevents.di.Modules.MyEventsModule
 import myevents.almansa.unir.es.myevents.model.Event
+import myevents.almansa.unir.es.myevents.model.Token
 import myevents.almansa.unir.es.myevents.model.adapters.EventsRecyclerViewAdapter
 import myevents.almansa.unir.es.myevents.presenter.interfaces.MyEventsPresenter
+import myevents.almansa.unir.es.myevents.utils.Constants
 import myevents.almansa.unir.es.myevents.utils.toast
 import myevents.almansa.unir.es.myevents.view.interfaces.MyEventsView
 import javax.inject.Inject
@@ -26,7 +29,8 @@ class MyEventsViewImpl : AppCompatActivity(), MyEventsView {
 
     private lateinit var eventAdapter: EventsRecyclerViewAdapter
 
-    val events: MutableList<Event> = mutableListOf()
+    private val events: MutableList<Event> = mutableListOf()
+    private lateinit var tokenDb: Token
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -34,7 +38,9 @@ class MyEventsViewImpl : AppCompatActivity(), MyEventsView {
         setContentView(R.layout.myevents_view)
         injectDependency()
 
-        myEventsPresenter.setView(this)
+        tokenDb = getTokenFromIntent()
+
+        myEventsPresenter.setView(this, tokenDb)
 
         val mLayoutManager = LinearLayoutManager(applicationContext)
         rvEvents.layoutManager = mLayoutManager
@@ -43,6 +49,14 @@ class MyEventsViewImpl : AppCompatActivity(), MyEventsView {
         eventAdapter = EventsRecyclerViewAdapter(events)
         rvEvents.adapter = eventAdapter
 
+    }
+
+    private fun getTokenFromIntent(): Token {
+        val bundle = intent.getBundleExtra(Constants.BUNDLE)
+        when (bundle == null) {
+            true -> return Token()
+            false -> return bundle.getParcelable(Constants.TOKEN) as Token
+        }
     }
 
     override fun updateRecyclerView(event: Event) {
@@ -108,7 +122,9 @@ class MyEventsViewImpl : AppCompatActivity(), MyEventsView {
     }
 
     override fun navigateToLoginView() {
-        startActivity(Intent(this, LoginViewImpl::class.java))
+        val intent = Intent(this, LoginViewImpl::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
     }
 
 }

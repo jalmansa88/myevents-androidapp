@@ -14,5 +14,10 @@ class Constants {
         const val ROLE = "role"
         const val EMAIL = "email"
         const val EVENT = "event"
+        const val TOKEN = "token"
+        const val VALUE = "value"
+
+        const val BUNDLE = "bundle"
+
     }
 }

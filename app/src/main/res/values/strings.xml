@@ -19,4 +19,8 @@
     <string name="login_out">Desconectándose</string>
     <string name="facebook_app_id">1917536878277335</string>
     <string name="fb_login_protocol_scheme">fb1917536878277335</string>
+    <string name="token_temporal_access">Acceso Temporal</string>
+    <string name="invalid_token">Introduzca un token válido</string>
+    <string name="not_valid_token">Token no válido o expirado. Consulte al Administrador del Evento</string>
+    <string name="login_temporal">Login temporal</string>
 </resources>

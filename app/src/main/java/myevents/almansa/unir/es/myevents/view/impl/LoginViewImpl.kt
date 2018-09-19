@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import com.facebook.CallbackManager
@@ -21,7 +19,9 @@ import myevents.almansa.unir.es.myevents.R
 import myevents.almansa.unir.es.myevents.R.string.*
 import myevents.almansa.unir.es.myevents.di.Components.DaggerLoginComponent
 import myevents.almansa.unir.es.myevents.di.Modules.LoginModule
+import myevents.almansa.unir.es.myevents.model.Token
 import myevents.almansa.unir.es.myevents.presenter.interfaces.LoginPresenter
+import myevents.almansa.unir.es.myevents.utils.Constants
 import myevents.almansa.unir.es.myevents.utils.registerCallback
 import myevents.almansa.unir.es.myevents.utils.toast
 import myevents.almansa.unir.es.myevents.view.interfaces.LoginView
@@ -30,7 +30,6 @@ import java.util.*
 import javax.inject.Inject
 
 class LoginViewImpl : AppCompatActivity(), LoginView {
-
     private val TAG = "LoginViewImpl"
 
     @Inject
@@ -52,39 +51,54 @@ class LoginViewImpl : AppCompatActivity(), LoginView {
         configureButtons()
     }
 
+    override fun showUiForms() {
+        login_ui.visibility = View.VISIBLE
+        login_loading.visibility = View.INVISIBLE
+    }
+
+    override fun showLoading() {
+        login_ui.visibility = View.INVISIBLE
+        login_loading.visibility = View.VISIBLE
+    }
+
     override fun showLoginErrorMessage() {
+        login_ui.visibility = View.VISIBLE
+        login_loading.visibility = View.INVISIBLE
         toast(getString(fb_login_error))
-    }
-
-    override fun showLoginEmailForm() {
-        login_form.visibility = View.VISIBLE
-    }
-
-    override fun hideLoginEmailForm() {
-        login_form.visibility = View.INVISIBLE
     }
 
     override fun showLoginOut() {
         toast(getString(login_out))
     }
 
-    override fun showFacebookLoginButton() {
-        facebook_login.visibility = View.VISIBLE
+    override fun navigateToEvents() {
+        val intent = Intent(this, MyEventsViewImpl::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
     }
 
-    override fun hideFacebookLoginButton() {
-        facebook_login.visibility = View.INVISIBLE
+    override fun navigateToEventsAnonymous(dbToken: Token) {
+
+        var bundle = Bundle()
+        bundle.putParcelable(Constants.TOKEN, dbToken)
+
+        val intent = Intent(this, MyEventsViewImpl::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .putExtra(Constants.BUNDLE, bundle)
+
+        startActivity(intent)
     }
 
-    override fun showToast(msg: String) {
-        toast(msg)
+    override fun showInvalidToken() {
+        login_ui.visibility = View.VISIBLE
+        login_loading.visibility = View.INVISIBLE
+        toast(getString(R.string.not_valid_token))
     }
 
     override fun onStart() {
         super.onStart()
         mAuth.addAuthStateListener(firebaseAuthListener)
     }
-
 
     override fun onStop() {
         super.onStop()
@@ -93,10 +107,12 @@ class LoginViewImpl : AppCompatActivity(), LoginView {
 
     private fun configureButtons() {
         val loginBtn = btnLogin as Button
+        val tempAccessBtn = btTempAccess as Button
         val fbLogin = btFbLogin as LoginButton
         fbLogin.setReadPermissions(Arrays.asList("email"))
 
         loginBtn.setOnClickListener { login() }
+        tempAccessBtn.setOnClickListener { tempAccessListener() }
 
         fbLogin.registerCallback(callbackManager) {
 
@@ -105,7 +121,7 @@ class LoginViewImpl : AppCompatActivity(), LoginView {
                     throw Exception(getString(fb_login_token_null))
                 }
                 val loginToken = it.accessToken
-                loginPresenter.handleFacebookAccesToken(loginToken)
+                loginPresenter.handleFacebookAccessToken(loginToken)
             }
 
             onError {
@@ -120,10 +136,20 @@ class LoginViewImpl : AppCompatActivity(), LoginView {
         }
     }
 
+    private fun tempAccessListener() {
+
+        if (TextUtils.isEmpty(etTempToken.text.toString())) {
+            etTempToken.error = getString(R.string.invalid_token)
+            return
+        }
+
+        loginPresenter.handleTemporalAccess(etTempToken.text.toString())
+    }
+
     private val firebaseAuthListener = FirebaseAuth.AuthStateListener {
         var user: FirebaseUser? = mAuth.currentUser
         if (user != null) {
-            startActivity(Intent(this, MyEventsViewImpl::class.java))
+            navigateToEvents()
         }
     }
 
@@ -142,14 +168,14 @@ class LoginViewImpl : AppCompatActivity(), LoginView {
                 .addOnCompleteListener(this) {
                     if (it.isSuccessful) {
                         toast(login_correct)
-                        startActivity(Intent(this, MyEventsViewImpl::class.java))
+                        navigateToEvents()
                     } else {
                         toast(login_incorrect)
                     }
                 }
     }
 
-    fun emailOrPasswordAreWrong(email: String, pass: String): Boolean {
+    private fun emailOrPasswordAreWrong(email: String, pass: String): Boolean {
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             EtEmail.error = getString(error_invalid_email)

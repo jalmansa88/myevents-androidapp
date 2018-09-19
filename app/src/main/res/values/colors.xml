@@ -3,4 +3,5 @@
     <color name="colorPrimary">#212529</color>
     <color name="colorPrimaryDark">#428bca</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="temp_access_button">#0ba300</color>
 </resources>

@@ -6,5 +6,6 @@ import myevents.almansa.unir.es.myevents.view.interfaces.LoginView
 interface LoginPresenter {
     fun setView(view: LoginView)
     fun destroy()
-    fun handleFacebookAccesToken(accessToken: AccessToken)
+    fun handleFacebookAccessToken(accessToken: AccessToken)
+    fun handleTemporalAccess(token: String)
 }

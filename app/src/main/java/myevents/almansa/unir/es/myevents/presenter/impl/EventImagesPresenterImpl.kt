@@ -25,10 +25,10 @@ class EventImagesPresenterImpl(var model: EventImagesModel): EventImagesPresente
         this.view = null
     }
 
-    override fun loadImages(eventUrl: String, role: Int) {
+    override fun loadImages(eventUid: String, role: Int) {
         view?.showLoading()
 
-        model.loadImages(eventUrl, role)
+        model.loadImages(eventUid, role)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(

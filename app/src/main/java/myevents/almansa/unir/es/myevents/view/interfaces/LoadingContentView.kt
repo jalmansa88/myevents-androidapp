@@ -1,8 +1,7 @@
 package myevents.almansa.unir.es.myevents.view.interfaces
 
-interface LoadingContentView: ShowToast {
+interface LoadingContentView: ShowToast, ShowError {
     fun showContent()
-    fun showError()
     fun showLoading()
     fun showEmpty()
 }

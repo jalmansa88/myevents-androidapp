@@ -1,6 +1,5 @@
 package myevents.almansa.unir.es.myevents.model.impl
 
-import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import io.reactivex.Observable
 import myevents.almansa.unir.es.myevents.model.Img
