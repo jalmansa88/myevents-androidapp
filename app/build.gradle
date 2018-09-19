@@ -9,8 +9,8 @@ android {
         applicationId "myevents.almansa.unir.es.myevents"
         minSdkVersion 22
         targetSdkVersion 27
-        versionCode 2
-        versionName "0.2.0a"
+        versionCode 4
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
