@@ -3,11 +3,24 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
+    <string name="log_out">Log out</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="action_sign_in">Log in</string>
+    <string name="error_invalid_email">El eMail es inválido</string>
+    <string name="error_incorrect_password">Password incorrecto</string>
+    <string name="login_incorrect">Login incorrecto</string>
+    <string name="login_correct">Login correcto</string>
+    <string name="error_field_required">Campo obligatorio</string>
+    <string name="title_login_activity">LoginActivity</string>
+    <string name="event_images">%1$s Imágenes</string>
+    <string name="fb_login_error">Ha habido un error en el Login con Facebook</string>
+    <string name="fb_login_cancel">Se ha cancelado el Login con Facebook</string>
+    <string name="fb_login_token_null">LoginResult es Nulo</string>
+    <string name="login_out">Desconectándose</string>
+    <string name="facebook_app_id">1917536878277335</string>
+    <string name="fb_login_protocol_scheme">fb1917536878277335</string>
+    <string name="token_temporal_access">Acceso Temporal</string>
+    <string name="invalid_token">Introduzca un token válido</string>
+    <string name="not_valid_token">Token no válido o expirado. Consulte al Administrador del Evento</string>
+    <string name="login_temporal">Login temporal</string>
 </resources>
