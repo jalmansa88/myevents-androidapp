@@ -9,8 +9,8 @@ android {
         applicationId "myevents.almansa.unir.es.myevents"
         minSdkVersion 22
         targetSdkVersion 27
-        versionCode 4
-        versionName "1.0.1"
+        versionCode 5
+        versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -55,7 +55,7 @@ dependencies {
 
     // RxKotlin
     implementation group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: '2.3.0'
-    compile group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.0'
+    implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.0'
 
 }
 
